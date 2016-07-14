@@ -18,7 +18,7 @@
       "location": "San Francisco"
     },
     "role": "Software Developer",
-    "skills": ["Java", "Javascript", "HTML", "CSS"],
+    "skills": ["Java", "Javascript", "HTML", "CSS", "AngularJS", "jQuery"],
     "welcomeMessage": "Hello",
     "bioPic": "images/bourne.jpg"
   };
@@ -41,10 +41,10 @@
 
   var projects = {
     "projects": [{
-        "title": "string",
-        "dates": "string (works with a hyphen between them)",
-        "description": "string",
-        "images": "array with string urls"
+        "title": "Classic Arcade Frogger",
+        "dates": "2016",
+        "description": "A classic arcade games implemented using JavaScript",
+        "images": "images/arcade-frogger.jpg"
       }]
   };
 
@@ -53,14 +53,14 @@
          "employer": "Accenture",
          "title": "Software Engineer Associate",
          "location": "San Franciso",
-         "dates": "In progress",
-         "description": "string"
+         "dates": "Present",
+         "description": "Developed an automation tool application that transfers customer data and updates their database utilizing HTML, CSS, Javascript and AngularJS on the front-end."
        }, {
          "employer": "Zoomsystems",
          "title": "Software Engineer Intern",
          "location": "San Franciso",
          "dates": "2014",
-         "description": "string"
+         "description": "Evaluated and reported software issues, bugs and variances using Jira software involving program functionality and content of software developers"
        }]
   };
 
@@ -75,7 +75,7 @@
 
     $("#header").prepend(formattedRole);
     $("#header").prepend(formattedName);
-  }
+  };
 
   /**
   * @description It displays education object
@@ -101,7 +101,27 @@
         $(".education-entry:last").append(formattedMajor);
       });
     }
-  }
+  };
+
+  /**
+  * @description It display the projects object
+  * @param none
+  * @param none
+  */
+  projects.display = function() {
+    for(var project in projects.projects) {
+      var formattedTitle = HTMLprojectTitle.replace("%data%",projects.projects[project].title);
+      var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+      var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+      var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images);
+
+      $("#projects").append(HTMLprojectStart);
+      $(".project-entry:last").append(formattedTitle);
+      $(".project-entry:last").append(formattedDates);
+      $(".project-entry:last").append(formattedDescription);
+      $(".project-entry:last").append(formattedImage);
+    }
+  };
 
   /**
   * @description It display the work object
@@ -121,13 +141,12 @@
       $(".work-entry:last").append(formattedDates);
       $(".work-entry:last").append(formattedDescription);
     }
-  }
+  };
 
   // functions to access private variables
   resume.getBio = function() { return bio; };
   resume.getEducation = function() { return education; }
   resume.getWork = function() { return work; }
-  resume.getProject = function() { return projects; }
 
   $("#main");
   $("#main").append(internationalizeButton);
@@ -141,6 +160,7 @@
   function initialize() {
     bio.display();
     education.display();
+    projects.display();
     work.display();
   }
 
